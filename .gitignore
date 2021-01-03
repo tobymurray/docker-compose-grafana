@@ -1,2 +1,4 @@
 .env
 
+grafana/grafana-lib/grafana.db
+

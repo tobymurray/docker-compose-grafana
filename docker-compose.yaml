@@ -7,9 +7,15 @@ services:
       - 3000:3000
     networks:
       - grafana_network
+    volumes:
+      - /home/toby/git/docker-compose-projects/grafana/grafana/grafana-lib:/var/lib/grafana
+      - /home/toby/git/docker-compose-projects/grafana/grafana/provisioning:/etc/grafana/provisioning
+
+    # Support the bind mount by running this as me, with CURRENT_UID=$(id -u):$(id -g)
+    user: ${CURRENT_UID}
 
   database:
-    image: postgres:alpine
+    image: timescale/timescaledb:latest-pg12
     networks:
       - grafana_network
     environment:
